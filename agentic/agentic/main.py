@@ -29,7 +29,7 @@ llm = ChatOpenAI(
 # =========================
 # Define Tools
 # =========================
-
+ 
 @tool
 def add(a: int, b: int) -> int:
     """Add two numbers"""
@@ -53,7 +53,7 @@ llm_with_tools = llm.bind_tools(tools)
 # =========================
 # LangGraph Setup
 # =========================
-
+ 
 from langgraph.graph import add_messages
 from langgraph.func import entrypoint, task
 
@@ -74,7 +74,7 @@ def call_tool(tool_call: ToolCall):
     """Execute the selected tool"""
     tool_fn = tools_by_name[tool_call["name"]]
     return tool_fn.invoke(tool_call)
-
+ 
 @entrypoint()
 def agent(messages: List[BaseMessage]):
     response = call_llm(messages).result()
@@ -92,7 +92,7 @@ def agent(messages: List[BaseMessage]):
 # =========================
 # Run the Agent
 # =========================
-
+ 
 if __name__ == "__main__":
     messages = [HumanMessage(content="Divide 1 and 0")]
     final_messages = agent.invoke(messages)
